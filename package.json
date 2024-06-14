@@ -1,0 +1,17 @@
+{
+  "name": "templates",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Minial static site generator with no dependencies",
+  "main": "./dist/generate.js",
+  "bin": "./bin/build.sh",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arash Thr",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.7.4"
+  }
+}

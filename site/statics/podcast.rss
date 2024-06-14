@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="${ site.lang }">
+    <channel>
+        <atom:link href="${ site.url }${ site.baseurl }podcast.rss" rel="self" type="application/rss+xml" />
+        <title>${ site.title }</title>
+        <description>${ xmlEscape(site.description) }</description>
+        <link>${ site.url }${ site.baseurl }</link>
+        <language>${ site.lang }</language>
+        <managingEditor>${ site.owner.email } (${ site.owner.name })</managingEditor>
+        <webMaster>${ site.owner.email } (${ site.owner.name })</webMaster>
+        <copyright>${ new Date().getFullYear() } ${ site.title }</copyright>
+        <pubDate>${ new Date().toUTCString() }</pubDate>
+        <lastBuildDate>${ new Date().toUTCString() }</lastBuildDate>
+        <image>
+            <link>${ site.url }${ site.baseurl }</link>
+            <url>${ site.url }${ site.baseurl }img/PR/itunes-logo.png</url>
+            <title>${ site.title }</title>
+        </image>
+        <itunes:subtitle>${ site.tagline }</itunes:subtitle>
+        <itunes:author>${ site.author }</itunes:author>
+        <itunes:summary>${ xmlEscape(site.description) }</itunes:summary>
+        <itunes:keywords>${ site.keywords }</itunes:keywords>
+        <itunes:owner>
+            <itunes:name>${ site.owner.name }</itunes:name>
+            <itunes:email>${ site.owner.email }</itunes:email>
+        </itunes:owner>
+        <itunes:image href="${ site.url }${ site.baseurl }img/PR/itunes-logo.png" />
+        <itunes:category text="Technology" />
+        <itunes:explicit>no</itunes:explicit>
+        % for (let post of posts) {
+        <item>
+            <title>${ xmlEscape(post.title) }</title>
+            <link>${ site.url }${ site.baseurl }${ post.url }</link>
+            <pubDate>${ post.publishDate }</pubDate>
+            <description>${ xmlEscape(post.summary) }</description>
+            <guid isPermaLink="true">${ site.url }${ site.baseurl }${ post.url }</guid>
+            <enclosure url="${ site.redirect }${ post.audioUrl }" length="${ post.duration }" type="audio/mp3"/>
+            <itunes:author>${ site.owner.name }</itunes:author>
+            <itunes:subtitle>${ site.title }: ${ xmlEscape(post.title) }</itunes:subtitle>
+            <itunes:summary>${ xmlEscape(post.summary) }</itunes:summary>
+            <itunes:duration>${ post.duration }</itunes:duration>
+            <itunes:keywords>${ post.keywords }</itunes:keywords>
+            <itunes:image href="${ site.url + (post.cover ? post.cover : site.baseurl + 'img/PR/itunes-logo.png') }" />
+            <itunes:explicit>${ post.explicit || "no" }</itunes:explicit>
+            <itunes:block>${ post.block || "no" }</itunes:block>
+            <itunes:season>${ post.season || 'Season one'}</itunes:season>
+        </item>
+        % }
+    </channel>
+</rss>
